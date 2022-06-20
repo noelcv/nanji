@@ -36,7 +36,7 @@ export const NewPost = ({ user }: Props ) => {
     }
     
     type locationSearchPayload = {
-        payload?: string;
+        payload?: string; //TODO: can we remove this?
         results?: string[];
         label?: string;
     }
