@@ -172,41 +172,46 @@ export function RequestList({
         <h4>Friend Requests</h4>
         <div className="outgoing">
           <h5>Pending Sent Requests</h5>
-          {outGoing.map((req) => (
-            <div className="individualrequest" key={req.id} id={req.id}>
-              <div className="textinfo">
-                <p>Name: {req.given_name + " " + req.family_name}</p>
-                <p>Username: {req.preferred_username}</p>
-              </div>
-              <div className="iconinfo">
-                <TiCancelOutline
-                  className="denyrequest"
-                  onClick={() => cancelRequestHandler(req.id)}
-                />
-              </div>
-            </div>
-          ))}
+          {outGoing &&
+            outGoing.map((req) => {
+              console.log(req);
+              return (
+                <div className="individualrequest" key={req.id} id={req.id}>
+                  <div className="textinfo">
+                    <p>Name: {req.given_name + " " + req.family_name}</p>
+                    <p>Username: {req.preferred_username}</p>
+                  </div>
+                  <div className="iconinfo">
+                    <TiCancelOutline
+                      className="denyrequest"
+                      onClick={() => cancelRequestHandler(req.id)}
+                    />
+                  </div>
+                </div>
+              );
+            })}
         </div>
         <div className="incoming">
           <h5>Pending Received Requests</h5>
-          {incoming.map((req) => (
-            <div className="individualrequest" key={req.id} id={req.id}>
-              <div className="textinfo">
-                <p>Name: {req.given_name + " " + req.family_name}</p>
-                <p>Username: {req.preferred_username}</p>
+          {incoming &&
+            incoming.map((req) => (
+              <div className="individualrequest" key={req.id} id={req.id}>
+                <div className="textinfo">
+                  <p>Name: {req.given_name + " " + req.family_name}</p>
+                  <p>Username: {req.preferred_username}</p>
+                </div>
+                <div className="iconinfo">
+                  <BiUserPlus
+                    className="acceptrequest"
+                    onClick={() => acceptRequestHandler(req.id)}
+                  />
+                  <BiUserMinus
+                    className="denyrequest"
+                    onClick={() => denyRequestHandler(req.id)}
+                  />
+                </div>
               </div>
-              <div className="iconinfo">
-                <BiUserPlus
-                  className="acceptrequest"
-                  onClick={() => acceptRequestHandler(req.id)}
-                />
-                <BiUserMinus
-                  className="denyrequest"
-                  onClick={() => denyRequestHandler(req.id)}
-                />
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
         {acceptedStatus ? (
           <Alert variation="success" isDismissible={true}>

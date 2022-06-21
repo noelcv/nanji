@@ -15,8 +15,9 @@ type UserType = {
 
 type PostType = {
   id: string;
-  date: Date;
-  s3Image: string;
+  date: Date | string;
+  s3Image?: string;
+  image?: string;
   location: string;
   content: string;
   createdAt: Date;
