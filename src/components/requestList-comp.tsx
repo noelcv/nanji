@@ -47,21 +47,28 @@ export function RequestList({
   const [cancelledStatus, setCancelledStatus] = useState<boolean>(false);
 
   useEffect(() => {
-    getOutgoingRequests(user.username).then((data) => {
-      setOutGoing(data);
-    });
+    getOutgoingRequests(user.username)
+      .then((data) => {
+        console.log(data);
+        setOutGoing(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    getIncomingRequests(user.username).then((data) => {
-      setIncoming(data);
-    });
+    getIncomingRequests(user.username)
+      .then((data) => {
+        setIncoming(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    getFriends(user.username).then((data) => {
-      setFriends(data);
-    });
+    getFriends(user.username)
+      .then((data) => {
+        setFriends(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   function dismissAlerts() {
@@ -174,7 +181,6 @@ export function RequestList({
           <h5>Pending Sent Requests</h5>
           {outGoing &&
             outGoing.map((req) => {
-              console.log(req);
               return (
                 <div className="individualrequest" key={req.id} id={req.id}>
                   <div className="textinfo">

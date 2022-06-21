@@ -31,9 +31,11 @@ export function FriendsList({ user, friends, setFriends }: Props) {
     } else {
       setUserCred(id);
     }
-    getFriends(userCred).then((data) => {
-      setFriends(data);
-    });
+    getFriends(userCred)
+      .then((data) => {
+        setFriends(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   return (

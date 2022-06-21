@@ -37,30 +37,36 @@ export const Dashboard = ({
   const [token, setToken] = React.useState<string>("");
 
   useEffect(() => {
-    listUserPosts(user.username, token).then((data) => {
-      setPosts(data.data.postByUser.items);
-      const tokenID = data.data.postByUser.nextToken;
-      setToken(tokenID);
-    });
+    listUserPosts(user.username, token)
+      .then((data) => {
+        setPosts(data.data.postByUser.items);
+        const tokenID = data.data.postByUser.nextToken;
+        setToken(tokenID);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    listAllUserPosts(user.username).then((data) => {
-      const listData = data.data.postByUser.items;
-      sortData(listData);
-      setAllPosts(duplicatesByMonth(listData));
-      if (listData.length === 0) {
-        setNoPosts(true);
-      } else {
-        setNoPosts(false);
-      }
-    });
+    listAllUserPosts(user.username)
+      .then((data) => {
+        const listData = data.data.postByUser.items;
+        sortData(listData);
+        setAllPosts(duplicatesByMonth(listData));
+        if (listData.length === 0) {
+          setNoPosts(true);
+        } else {
+          setNoPosts(false);
+        }
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    getFriends(user.username).then((data) => {
-      setFriends(data);
-    });
+    getFriends(user.username)
+      .then((data) => {
+        setFriends(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   //TODO: refactor to async/await
