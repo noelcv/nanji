@@ -29,17 +29,19 @@ export function PostList({
   return (
     <>
       <div id="postlist" onClick={dismissAlert}>
-        {posts.map((post) => (
-          <Post
-            currentFriend={currentFriend}
-            post={post}
-            posts={posts}
-            setPosts={setPosts}
-            setAllPosts={setAllPosts}
-            setDeleted={setDeleted}
-            key={post.id}
-          />
-        ))}
+        {posts.map((post) => {
+          return (
+            <Post
+              currentFriend={currentFriend}
+              post={post}
+              posts={posts}
+              setPosts={setPosts}
+              setAllPosts={setAllPosts}
+              setDeleted={setDeleted}
+              key={post.id}
+            />
+          );
+        })}
         {deleted ? (
           <Alert variation="success" isDismissible={true}>
             Post Deleted

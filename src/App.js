@@ -1,17 +1,16 @@
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import './index.css';
-import '@aws-amplify/ui-react/styles.css';
-import { Header } from './components/header-comp';
-import { NewPost } from './pages/newPost-page';
-import { Dashboard } from './pages/dashboard-page';
-import { Account } from './pages/account-page';
-import { Friends } from './pages/friends-page';
-import { UserFriend } from './pages/userFriend-page';
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "./index.css";
+import "@aws-amplify/ui-react/styles.css";
+import { Header } from "./components/header-comp";
+import { NewPost } from "./pages/newPost-page";
+import { Dashboard } from "./pages/dashboard-page";
+import { Account } from "./pages/account-page";
+import { Friends } from "./pages/friends-page";
+import { UserFriend } from "./pages/userFriend-page";
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // type Props =
-
 
 function App({ signOut, user }) {
   const [friends, setFriends] = useState([]);

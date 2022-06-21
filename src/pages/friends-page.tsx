@@ -3,7 +3,6 @@ import { Search } from "../components/search-comp";
 import { FriendsList } from "../components/friendsList-comp";
 import { RequestList } from "../components/requestList-comp";
 import "../css/friends.css";
-import Dispatch from "react";
 
 // TODO: check setFriends
 
@@ -18,7 +17,7 @@ type UserType = {
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: any;
+  setFriends: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 export function Friends({ user, friends, setFriends }: Props) {
@@ -36,7 +35,7 @@ export function Friends({ user, friends, setFriends }: Props) {
             setOutGoing={setOutGoing}
             incoming={incoming}
             setIncoming={setIncoming}
-            // friends={friends}
+            //friends={friends}
             setFriends={setFriends}
           />
         </div>

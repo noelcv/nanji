@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import React from "react";
 
-// TODO: confirm type SetFriends
-
 type UserType = {
   username: string;
   id: string;
@@ -41,9 +39,10 @@ export function FriendsList({ user, friends, setFriends }: Props) {
   return (
     <div id="friendlist">
       <h4>Friends and Family</h4>
-      {friends.map((friend) => (
-        <Friend key={friend.id} friend={friend} />
-      ))}
+      {friends &&
+        friends.map((friend) => {
+          return <Friend key={friend.id} friend={friend} />;
+        })}
     </div>
   );
 }

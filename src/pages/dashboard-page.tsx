@@ -37,7 +37,7 @@ export const Dashboard = ({
   const [token, setToken] = React.useState<string>("");
 
   useEffect(() => {
-    listUserPosts(user.username, token)
+    listUserPosts(user.username)
       .then((data) => {
         setPosts(data.data.postByUser.items);
         const tokenID = data.data.postByUser.nextToken;
