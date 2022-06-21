@@ -3,6 +3,7 @@ import { Search } from "../components/search-comp";
 import { FriendsList } from "../components/friendsList-comp";
 import { RequestList } from "../components/requestList-comp";
 import "../css/friends.css";
+import Dispatch from "react";
 
 // TODO: check setFriends
 
@@ -21,8 +22,8 @@ type Props = {
 };
 
 export function Friends({ user, friends, setFriends }: Props) {
-  const [outGoing, setOutGoing] = React.useState<string[]>([]);
-  const [incoming, setIncoming] = React.useState<string[]>([]);
+  const [outGoing, setOutGoing] = React.useState<UserType[]>();
+  const [incoming, setIncoming] = React.useState<UserType[]>();
 
   return (
     <>
@@ -35,7 +36,7 @@ export function Friends({ user, friends, setFriends }: Props) {
             setOutGoing={setOutGoing}
             incoming={incoming}
             setIncoming={setIncoming}
-            friends={friends}
+            // friends={friends}
             setFriends={setFriends}
           />
         </div>

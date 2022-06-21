@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 import { getUser } from "../graphql/queries";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { PostList } from "../components/postList-comp";
 import { Menu } from "../components/menu-comp";
 import { duplicatesByMonth } from "../utils/duplicates";
@@ -9,6 +9,7 @@ import { listAllUserPosts, listUserPosts } from "../utils/listdata";
 import { sortData } from "../utils/sort";
 import { BsChevronDown } from "react-icons/bs";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import React from "react";
 
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
@@ -19,6 +20,16 @@ type UserType = {
   family_name: string;
   given_name: string;
   preferred_username: string;
+};
+
+type PostType = {
+  id: string;
+  date: Date;
+  s3Image: string;
+  location: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type Props = {
@@ -34,7 +45,9 @@ type Props = {
   };
   setCurrentFriend?: any;
   signOut: any;
-  setUserCred: (value: React.SetStateAction<string>) => void;
+  userCred: string;
+  posts: PostType[];
+  setPosts: Dispatch<SetStateAction<PostType[]>>;
 };
 
 export function UserFriend({
@@ -43,7 +56,7 @@ export function UserFriend({
   currentFriend,
   setCurrentFriend,
   signOut,
-  setUserCred,
+  userCred,
 }: Props) {
   const { id } = useParams<string>();
 
@@ -68,11 +81,12 @@ export function UserFriend({
   const [token, setToken] = useState<string>();
 
   useEffect(() => {
-    listUserPosts(id).then((data) => {
-      setPosts(data.data.postByUser.items);
-      const tokenID = data.data.postByUser.nextToken;
-      setToken(tokenID);
-    });
+    id &&
+      listUserPosts(id).then((data) => {
+        setPosts(data?.data.postByUser.items);
+        const tokenID = data?.data.postByUser.nextToken;
+        setToken(tokenID);
+      });
   }, []);
 
   useEffect(() => {
@@ -89,14 +103,15 @@ export function UserFriend({
   }, []);
 
   async function newPage() {
-    listUserPosts(id, token).then((data) => {
-      if (token === null || undefined) return;
-      setPosts((prev) => {
-        return [...prev, ...data.data.postByUser.items];
+    id &&
+      listUserPosts(id, token).then((data) => {
+        if (token === null || undefined) return;
+        setPosts((prev) => {
+          return [...prev, ...data?.data.postByUser.items];
+        });
+        const tokenID = data?.data.postByUser.nextToken;
+        setToken(tokenID);
       });
-      const tokenID = data.data.postByUser.nextToken;
-      setToken(tokenID);
-    });
   }
 
   if (noPosts === true) {
@@ -112,7 +127,7 @@ export function UserFriend({
           token={token}
           setToken={setToken}
           signOut={signOut}
-          setUserCred={setUserCred}
+          userCred={userCred}
         />
         <div id="nodata">
           <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -127,6 +142,7 @@ export function UserFriend({
             posts={posts}
             setPosts={setPosts}
             currentFriend={currentFriend}
+            setAllPosts={setAllPosts}
           />
           <Menu
             user={currentFriend}
@@ -138,7 +154,7 @@ export function UserFriend({
             token={token}
             setToken={setToken}
             signOut={signOut}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
           <button id="footer" onClick={newPage}>
             <BsChevronDown />

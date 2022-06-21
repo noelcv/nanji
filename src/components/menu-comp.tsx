@@ -7,6 +7,7 @@ import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { useState, Dispatch, SetStateAction } from "react";
 import "../css/menu.css";
+import React from "react";
 
 type UserType = {
   username: string;
@@ -36,7 +37,7 @@ type Props = {
   posts: PostType[];
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
-  setUserCred: (value: React.SetStateAction<string>) => void;
+  userCred: string;
 };
 
 export function Menu({
@@ -49,7 +50,7 @@ export function Menu({
   setPosts,
   token,
   setToken,
-  setUserCred,
+  userCred,
 }: Props) {
   const [menu, setMenu] = useState(true);
 
@@ -81,7 +82,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
         )}
       </div>
@@ -113,7 +114,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
         ) : (
           ""

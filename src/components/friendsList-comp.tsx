@@ -3,6 +3,7 @@ import { Friend } from "./friend-comp";
 import { getFriends } from "../utils/friendRequests";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import React from "react";
 
 // TODO: confirm type SetFriends
 

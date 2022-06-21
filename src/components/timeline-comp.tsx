@@ -2,6 +2,7 @@ import "../css/timeline.css";
 import { listUserPostsTimeline } from "../utils/listdata";
 import { useParams } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import React from "react";
 const moment = require("moment");
 
 type UserType = {
@@ -24,12 +25,12 @@ type PostType = {
 
 type Props = {
   user: UserType;
-  setUserCred: (value: React.SetStateAction<string>) => void;
   allPosts: PostType[];
   posts: PostType[];
   setPosts: Dispatch<SetStateAction<PostType[]>>;
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
+  userCred: string;
 };
 
 export function Timeline({
@@ -38,14 +39,14 @@ export function Timeline({
   setPosts,
   token,
   setToken,
-  setUserCred,
+  userCred,
 }: Props) {
   const { id } = useParams<string>();
 
   if (!id) {
-    setUserCred(user.username);
+    userCred = user.username;
   } else {
-    setUserCred(id);
+    userCred = id;
   }
 
   // let tokenID;
