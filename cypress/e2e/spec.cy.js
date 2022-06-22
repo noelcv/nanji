@@ -10,5 +10,9 @@ describe("media is rendered in the dashboard", () => {
     cy.get(".post")
       .invoke("attr", "id")
       .should("equal", "e1ee1830-bf73-4cb4-ac5c-0086d556e158");
+
+      ''testing''
   });
 });
+
+
